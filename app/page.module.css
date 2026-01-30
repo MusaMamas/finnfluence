@@ -1,0 +1,293 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero секция с фоном */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  /* Фоновое изображение - нужно заменить на реальное */
+  background-image: url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Темный оверлей поверх фона */
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 20, 30, 0.85) 0%,
+    rgba(0, 40, 60, 0.75) 50%,
+    rgba(0, 60, 80, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  padding: 0 40px;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.heroTitle {
+  font-size: 72px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.highlight {
+  color: #00d9ff;
+  display: inline-block;
+  text-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+}
+
+.heroSubtitle {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+  font-weight: 300;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  padding: 18px 50px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 217, 255, 0.5);
+}
+
+/* Секция "Что мы делаем" */
+.whatWeDo {
+  padding: 120px 0;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.sectionContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.sectionTitle {
+  font-size: 48px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sectionDescription {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px;
+  line-height: 1.6;
+}
+
+/* Сетка сервисов */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+}
+
+.serviceCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 153, 204, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
+}
+
+.serviceCard:hover::before {
+  opacity: 1;
+}
+
+.iconWrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  color: white;
+}
+
+.serviceTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.serviceDescription {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* Placeholder секция */
+.placeholder {
+  padding: 120px 0;
+  background: #0a0a0a;
+}
+
+.placeholderText {
+  text-align: center;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+/* Анимация появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 56px;
+  }
+  
+  .heroSubtitle {
+    font-size: 20px;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .sectionTitle {
+    font-size: 40px;
+  }
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 768px) {
+  .hero {
+    height: 80vh;
+  }
+  
+  .heroContent {
+    padding: 0 20px;
+  }
+  
+  .heroTitle {
+    font-size: 36px;
+  }
+  
+  .heroSubtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .ctaButton {
+    padding: 14px 35px;
+    font-size: 16px;
+  }
+  
+  .whatWeDo {
+    padding: 80px 0;
+  }
+  
+  .sectionContainer {
+    padding: 0 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 32px;
+  }
+  
+  .sectionDescription {
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .serviceCard {
+    padding: 30px;
+  }
+}

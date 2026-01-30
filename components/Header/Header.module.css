@@ -1,0 +1,223 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 80px;
+  
+  /* Темный фон с небольшой прозрачностью */
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  
+  /* Нижняя граница */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Контент внутри header */
+.inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 40px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Логотип слева - градиент как на картинке */
+.brand {
+  text-decoration: none;
+}
+
+.brandText {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-style: italic;
+  transition: all 0.3s ease;
+}
+
+/* FINN - бирюзовый градиент */
+.brandFinn {
+  background: linear-gradient(135deg, #5FF4FF 0%, #00D4FF 50%, #00A8CC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(95, 244, 255, 0.4));
+}
+
+/* FLUENCE - белый */
+.brandFluence {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.brand:hover .brandFinn {
+  filter: drop-shadow(0 0 30px rgba(95, 244, 255, 0.6));
+}
+
+/* Меню справа - белые буквы */
+.nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #5FF4FF;
+}
+
+/* Подчеркивание при наведении */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #5FF4FF 0%, #00D4FF 100%);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* Бургер меню */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.burgerLine {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Анимация бургера при открытии */
+.burgerOpen .burgerLine:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+
+.burgerOpen .burgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerOpen .burgerLine:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* Мобильное меню */
+.mobileNav {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 20px 0;
+  flex-direction: column;
+  gap: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileNavOpen {
+  max-height: 400px;
+}
+
+.mobileNavLink {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 16px 40px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.mobileNavLink:hover {
+  color: #5FF4FF;
+  background: rgba(95, 244, 255, 0.05);
+  border-left-color: #5FF4FF;
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) {
+  .header {
+    height: 70px;
+  }
+  
+  .brandText {
+    font-size: 28px;
+  }
+  
+  .nav {
+    gap: 24px;
+  }
+  
+  .navLink {
+    font-size: 13px;
+  }
+}
+
+/* Для телефонов */
+@media (max-width: 768px) {
+  .header {
+    height: 60px;
+  }
+
+  .inner {
+    padding: 0 20px;
+  }
+
+  .brandText {
+    font-size: 24px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .mobileNav {
+    display: flex;
+  }
+}
