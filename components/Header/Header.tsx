@@ -26,11 +26,11 @@ export default function Header() {
         </Link>
 
         <nav className={styles.nav} aria-label="Päävalikko">
-          <Link className={styles.navLink} href="/yritys">YRITYS</Link>
-          <Link className={styles.navLink} href="/palvelut">PALVELUT</Link>
-          <Link className={styles.navLink} href="/referenssit">REFERENSSIT</Link>
-          <Link className={styles.navLink} href="/blogi">BLOGI</Link>
-          <Link className={styles.navLink} href="/ota-yhteyttä">OTA YHTEYTTÄ</Link>
+          <Link className={styles.navLink} href="/">ETUSIVU</Link>
+          <Link className={styles.navLink} href="/vaikuttajat">VAIKUTTAJAT</Link>
+          <Link className={styles.navLink} href="/meista">MEISTÄ</Link>
+          <Link className={styles.navLink} href="/yhteystiedot">YHTEYSTIEDOT</Link>
+          <Link className={styles.navCta} href="/tilaa-kampanja">Tilaa kampanja</Link>
         </nav>
 
         {/* Бургер кнопка для мобильных */}
@@ -51,15 +51,14 @@ export default function Header() {
         className={`${styles.mobileNav} ${isMenuOpen ? styles.mobileNavOpen : ""}`}
         aria-label="Мобильное меню"
       >
-        <Link className={styles.mobileNavLink} href="/yritys" onClick={closeMenu}>YRITYS</Link>
-        <Link className={styles.mobileNavLink} href="/palvelut" onClick={closeMenu}>PALVELUT</Link>
-        <Link className={styles.mobileNavLink} href="/referenssit" onClick={closeMenu}>REFERENSSIT</Link>
-        <Link className={styles.mobileNavLink} href="/blogi" onClick={closeMenu}>BLOGI</Link>
-        <Link className={styles.mobileNavLink} href="/ota-yhteyttä" onClick={closeMenu}>OTA YHTEYTTÄ</Link>
+        <Link className={styles.mobileNavLink} href="/" onClick={closeMenu}>ETUSIVU</Link>
+        <Link className={styles.mobileNavLink} href="/vaikuttajat" onClick={closeMenu}>VAIKUTTAJAT</Link>
+        <Link className={styles.mobileNavLink} href="/meista" onClick={closeMenu}>MEISTÄ</Link>
+        <Link className={styles.mobileNavLink} href="/yhteystiedot" onClick={closeMenu}>YHTEYSTIEDOT</Link>
+        <Link className={styles.mobileNavCta} href="/tilaa-kampanja" onClick={closeMenu}>Tilaa kampanja</Link>
       </nav>
 
       <div className={styles.bottomLine} />
     </header>
   );
 }
-
