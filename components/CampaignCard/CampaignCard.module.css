@@ -1,0 +1,299 @@
+.wrapper {
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(4, 16, 24, 0.85);
+  border: 1px solid rgba(0, 217, 255, 0.18);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.cardPlaceholder {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Glow border pulse */
+.glowBorder {
+  position: absolute;
+  inset: -1px;
+  border-radius: 21px;
+  pointer-events: none;
+  z-index: 0;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(0, 217, 255, 0.08); }
+  50%       { box-shadow: 0 0 22px rgba(0, 217, 255, 0.22); }
+}
+
+/* ── Video area ── */
+.videoWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 14;
+  overflow: hidden;
+  background: #050d14;
+}
+
+/* TikTok thumbnail */
+.tiktokThumb {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    160deg,
+    #071a28 0%,
+    #0a2233 40%,
+    #081520 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .thumbImg {
+  transform: scale(1.06);
+}
+
+.thumbOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(0,217,255,0.08) 0%, transparent 70%);
+}
+
+.tiktokLogo {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.tiktokIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.viewsOnThumb {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #5FF4FF;
+  background: rgba(0,0,0,0.55);
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,217,255,0.2);
+}
+
+.eyeMini {
+  width: 13px;
+  height: 13px;
+}
+
+/* Placeholder */
+.placeholderBg {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #071520 0%, #0b1e28 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.placeholderIcon {
+  width: 60px;
+  height: 60px;
+  color: rgba(0, 217, 255, 0.18);
+}
+
+.placeholderIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.comingLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(0, 217, 255, 0.3);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Play circle (default state) */
+.playCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s;
+}
+
+.playCircleIcon {
+  width: 22px;
+  height: 22px;
+  margin-left: 3px;
+}
+
+/* Hover overlay */
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,5,12,0.88) 0%, rgba(0,10,20,0.55) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.playBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #050e14;
+  background: linear-gradient(135deg, #5FF4FF 0%, #00C8F0 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(0, 217, 255, 0.55);
+}
+
+.playIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Info section ── */
+.info {
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.infoTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.influencer {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(0, 217, 255, 0.65);
+}
+
+.viewsBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(0, 217, 255, 0.07);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #5FF4FF;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.eyeIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.viraaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #5FF4FF;
+  background: rgba(0, 217, 255, 0.06);
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}
+
+.viraaBtn:hover {
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.viràIcon {
+  width: 15px;
+  height: 15px;
+}

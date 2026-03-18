@@ -2,7 +2,31 @@
 
 import { motion } from "framer-motion";
 import InfluencerCard from "../components/InfluencerCard/InfluencerCard";
+import CampaignCard from "../components/CampaignCard/CampaignCard";
 import styles from "./page.module.css";
+
+const campaigns = [
+  {
+    influencerName: "silyavkin.nikita",
+    brand: "Tiflisi — Georgialainen Cafe & Baari",
+    views: "~45 000",
+    tiktokUrl: "https://vm.tiktok.com/ZNRu77KVq/",
+    thumbnail: "/tiflis.jpeg",
+    placeholder: false,
+  },
+  {
+    influencerName: "vaikuttaja2",
+    brand: "Kampanja 2",
+    views: "—",
+    placeholder: true,
+  },
+  {
+    influencerName: "vaikuttaja3",
+    brand: "Kampanja 3",
+    views: "—",
+    placeholder: true,
+  },
+];
 
 const influencers = [
   {
@@ -204,6 +228,32 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* KAMPANJAT */}
+      <section className={styles.campaigns}>
+        <div className={styles.sectionBg} />
+        <div className={styles.sectionContainer}>
+          <motion.div
+            className={styles.sectionHeader}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className={styles.sectionBadge}>Esimerkit</span>
+            <h2 className={styles.sectionTitle}>Kampanjat, jotka tuottavat tuloksia</h2>
+            <p className={styles.sectionDesc}>
+              Yhdistämme yritykset Suomen suosituimpiin TikTok-vaikuttajiin
+            </p>
+          </motion.div>
+
+          <div className={styles.campaignsGrid}>
+            {campaigns.map((c, i) => (
+              <CampaignCard key={c.brand} {...c} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

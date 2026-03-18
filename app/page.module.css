@@ -515,3 +515,32 @@
     flex: 1 1 100%;
   }
 }
+
+/* ─── KAMPANJAT ─────────────────────────────────── */
+.campaigns {
+  position: relative;
+  padding: 120px 0;
+  background: linear-gradient(180deg, #050a0e 0%, #060d14 100%);
+}
+
+.campaignsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .campaignsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .campaigns {
+    padding: 80px 0;
+  }
+  .campaignsGrid {
+    grid-template-columns: 1fr;
+  }
+}
