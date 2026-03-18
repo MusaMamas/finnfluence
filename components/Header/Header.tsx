@@ -1,61 +1,99 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import styles from "./Header.module.css";
 
-export default function Header() {
+const navLinks = [
+  { label: "ETUSIVU",     href: "#etusivu" },
+  { label: "VAIKUTTAJAT", href: "#vaikuttajat" },
+  { label: "MEISTÄ",      href: "#meista" },
+  { label: "YHTEYSTIEDOT",href: "#yhteystiedot" },
+];
+
+interface HeaderProps {
+  onOpenModal?: () => void;
+}
+
+export default function Header({ onOpenModal }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
+  const scrollTo = (href: string) => {
     setIsMenuOpen(false);
+    if (href.startsWith("#")) {
+      const el = document.getElementById(href.slice(1));
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand} aria-label="FinnFluence etusivu">
+        {/* Logo */}
+        <a
+          href="#etusivu"
+          className={styles.brand}
+          aria-label="FinnFluence etusivu"
+          onClick={(e) => { e.preventDefault(); scrollTo("#etusivu"); }}
+        >
           <span className={styles.brandText}>
             <span className={styles.brandFinn}>FINN</span>
             <span className={styles.brandFluence}>FLUENCE</span>
           </span>
-        </Link>
+        </a>
 
+        {/* Desktop nav */}
         <nav className={styles.nav} aria-label="Päävalikko">
-          <Link className={styles.navLink} href="/">ETUSIVU</Link>
-          <Link className={styles.navLink} href="/vaikuttajat">VAIKUTTAJAT</Link>
-          <Link className={styles.navLink} href="/meista">MEISTÄ</Link>
-          <Link className={styles.navLink} href="/yhteystiedot">YHTEYSTIEDOT</Link>
-          <Link className={styles.navCta} href="/tilaa-kampanja">Tilaa kampanja</Link>
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              className={styles.navLink}
+              href={link.href}
+              onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
+            >
+              {link.label}
+            </a>
+          ))}
+          <button className={styles.navCta} onClick={onOpenModal}>
+            Tilaa kampanja
+          </button>
         </nav>
 
-        {/* Бургер кнопка для мобильных */}
+        {/* Burger */}
         <button
           className={`${styles.burger} ${isMenuOpen ? styles.burgerOpen : ""}`}
-          onClick={toggleMenu}
-          aria-label="Меню"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Valikko"
           aria-expanded={isMenuOpen}
         >
-          <span className={styles.burgerLine}></span>
-          <span className={styles.burgerLine}></span>
-          <span className={styles.burgerLine}></span>
+          <span className={styles.burgerLine} />
+          <span className={styles.burgerLine} />
+          <span className={styles.burgerLine} />
         </button>
       </div>
 
-      {/* Мобильное меню */}
+      {/* Mobile nav */}
       <nav
         className={`${styles.mobileNav} ${isMenuOpen ? styles.mobileNavOpen : ""}`}
-        aria-label="Мобильное меню"
+        aria-label="Mobiilinavigaatio"
       >
-        <Link className={styles.mobileNavLink} href="/" onClick={closeMenu}>ETUSIVU</Link>
-        <Link className={styles.mobileNavLink} href="/vaikuttajat" onClick={closeMenu}>VAIKUTTAJAT</Link>
-        <Link className={styles.mobileNavLink} href="/meista" onClick={closeMenu}>MEISTÄ</Link>
-        <Link className={styles.mobileNavLink} href="/yhteystiedot" onClick={closeMenu}>YHTEYSTIEDOT</Link>
-        <Link className={styles.mobileNavCta} href="/tilaa-kampanja" onClick={closeMenu}>Tilaa kampanja</Link>
+        {navLinks.map((link) => (
+          <a
+            key={link.href}
+            className={styles.mobileNavLink}
+            href={link.href}
+            onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
+          >
+            {link.label}
+          </a>
+        ))}
+        <button
+          className={styles.mobileNavCta}
+          onClick={() => { setIsMenuOpen(false); onOpenModal?.(); }}
+        >
+          Tilaa kampanja
+        </button>
       </nav>
 
       <div className={styles.bottomLine} />

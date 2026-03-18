@@ -544,3 +544,189 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── MEISTÄ ────────────────────────────────────── */
+.about {
+  position: relative;
+  padding: 120px 0;
+  background: linear-gradient(180deg, #060d14 0%, #080f18 100%);
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.aboutText {
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutLead {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.aboutBody {
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+
+.aboutBody strong {
+  color: #5FF4FF;
+  font-weight: 700;
+}
+
+.advantagesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.advantageCard {
+  background: rgba(5, 18, 26, 0.8);
+  border: 1px solid rgba(0, 217, 255, 0.14);
+  border-radius: 16px;
+  padding: 24px 20px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.advantageIcon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.advantageTitle {
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.advantageDesc {
+  font-size: 13px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+}
+
+/* ─── YHTEYSTIEDOT CTA ──────────────────────────── */
+.contactCta {
+  position: relative;
+  padding: 120px 0;
+  background: linear-gradient(180deg, #080f18 0%, #050a0e 100%);
+  overflow: hidden;
+}
+
+.contactCtaGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(0, 217, 255, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contactCtaInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.contactCtaTitle {
+  font-size: 44px;
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+.contactCtaDesc {
+  font-size: 17px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.75;
+}
+
+.contactInfo {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.contactInfoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contactInfoItem:hover {
+  color: #5FF4FF;
+}
+
+.contactInfoIcon {
+  width: 18px;
+  height: 18px;
+  color: rgba(0, 217, 255, 0.55);
+  flex-shrink: 0;
+}
+
+/* ─── RESPONSIVE (additions) ────────────────────── */
+@media (max-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .contactCtaTitle {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about,
+  .contactCta {
+    padding: 80px 0;
+  }
+
+  .advantagesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .contactCtaTitle {
+    font-size: 28px;
+  }
+
+  .contactInfo {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+}
