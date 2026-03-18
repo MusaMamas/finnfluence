@@ -1,0 +1,228 @@
+.tiltWrapper {
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(5, 20, 28, 0.75);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.08), inset 0 0 40px rgba(0, 217, 255, 0.03);
+  transition: border-color 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.cardPlaceholder {
+  opacity: 0.5;
+}
+
+/* Animated glow ring */
+.glowRing {
+  position: absolute;
+  inset: -1px;
+  border-radius: 21px;
+  background: transparent;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  animation: glowPulse 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.1), 0 0 20px rgba(0, 217, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 217, 255, 0.25), 0 0 50px rgba(0, 217, 255, 0.1);
+  }
+}
+
+/* Image area */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.06);
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #071520 0%, #0a1a22 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.avatarIcon {
+  width: 72px;
+  height: 72px;
+  color: rgba(0, 217, 255, 0.2);
+}
+
+.comingLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(0, 217, 255, 0.3);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Hover overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 5, 10, 0.85) 0%, rgba(0, 5, 10, 0.2) 50%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.lisatiedotBtn {
+  display: inline-block;
+  padding: 10px 28px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #050e14;
+  background: linear-gradient(135deg, #5FF4FF 0%, #00C8F0 100%);
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(0, 217, 255, 0.5);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.lisatiedotBtn:hover {
+  box-shadow: 0 10px 36px rgba(0, 217, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Views badge */
+.viewsBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #5FF4FF;
+  letter-spacing: 0.5px;
+}
+
+.eyeIcon {
+  width: 13px;
+  height: 13px;
+  color: #5FF4FF;
+}
+
+/* Info section */
+.info {
+  padding: 18px 20px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #5FF4FF;
+  background: rgba(0, 217, 255, 0.08);
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.socialBtn:hover {
+  background: rgba(0, 217, 255, 0.18);
+  border-color: rgba(0, 217, 255, 0.5);
+  color: #ffffff;
+}
+
+.socialIcon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.statsRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.statChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.statIcon {
+  width: 13px;
+  height: 13px;
+  color: rgba(0, 217, 255, 0.5);
+}
