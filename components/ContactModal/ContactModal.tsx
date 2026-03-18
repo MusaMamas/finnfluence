@@ -9,18 +9,45 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
+interface FormFields {
+  name: string;
+  phone: string;
+  email: string;
+  company: string;
+  message: string;
+}
+
+type FormErrors = Partial<Record<keyof FormFields, string>>;
+
+function validate(form: FormFields): FormErrors {
+  const errors: FormErrors = {};
+  if (!form.name.trim()) errors.name = "Nimi on pakollinen";
+  if (!form.phone.trim()) {
+    errors.phone = "Puhelinnumero on pakollinen";
+  } else if (!/^\+?[\d\s\-()]{6,}$/.test(form.phone.trim())) {
+    errors.phone = "Tarkista puhelinnumeron muoto";
+  }
+  if (!form.email.trim()) {
+    errors.email = "Sähköposti on pakollinen";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+    errors.email = "Tarkista sähköpostiosoite";
+  }
+  return errors;
+}
+
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormFields>({
     name: "",
     phone: "",
     email: "",
     company: "",
     message: "",
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Close on Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -29,18 +56,33 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     return () => document.removeEventListener("keydown", handleKey);
   }, [isOpen, onClose]);
 
-  // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    const updated = { ...form, [name]: value };
+    setForm(updated);
+    if (touched[name as keyof FormFields]) {
+      setErrors(validate(updated));
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    setErrors(validate(form));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched({ name: true, phone: true, email: true });
+    const validationErrors = validate(form);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
     setLoading(true);
     // Simulate send — replace with real API call later
     await new Promise(r => setTimeout(r, 1000));
@@ -53,38 +95,35 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setTimeout(() => {
       setSubmitted(false);
       setForm({ name: "", phone: "", email: "", company: "", message: "" });
+      setErrors({});
+      setTouched({});
     }, 300);
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            className={styles.backdrop}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={handleClose}
-          />
-
-          {/* Modal */}
+        <motion.div
+          className={styles.backdrop}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          onClick={handleClose}
+        >
           <motion.div
             className={styles.modal}
-            initial={{ opacity: 0, scale: 0.92, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.92 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
+            onClick={e => e.stopPropagation()}
           >
-            {/* Glow top border */}
             <div className={styles.glowTop} />
 
-            {/* Close button */}
             <button className={styles.closeBtn} onClick={handleClose} aria-label="Sulje">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -93,7 +132,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
             <AnimatePresence mode="wait">
               {submitted ? (
-                /* Success state */
                 <motion.div
                   key="success"
                   className={styles.success}
@@ -116,7 +154,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   </button>
                 </motion.div>
               ) : (
-                /* Form */
                 <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <div className={styles.header}>
                     <span className={styles.badge}>Ota yhteyttä</span>
@@ -131,26 +168,32 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <div className={styles.field}>
                         <label className={styles.label}>Nimi *</label>
                         <input
-                          className={styles.input}
+                          className={`${styles.input} ${touched.name && errors.name ? styles.inputError : ""}`}
                           type="text"
                           name="name"
                           value={form.name}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           placeholder="Matti Virtanen"
-                          required
                         />
+                        {touched.name && errors.name && (
+                          <span className={styles.errorMsg}>{errors.name}</span>
+                        )}
                       </div>
                       <div className={styles.field}>
                         <label className={styles.label}>Puhelinnumero *</label>
                         <input
-                          className={styles.input}
+                          className={`${styles.input} ${touched.phone && errors.phone ? styles.inputError : ""}`}
                           type="tel"
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           placeholder="+358 40 123 4567"
-                          required
                         />
+                        {touched.phone && errors.phone && (
+                          <span className={styles.errorMsg}>{errors.phone}</span>
+                        )}
                       </div>
                     </div>
 
@@ -158,14 +201,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <div className={styles.field}>
                         <label className={styles.label}>Sähköposti *</label>
                         <input
-                          className={styles.input}
+                          className={`${styles.input} ${touched.email && errors.email ? styles.inputError : ""}`}
                           type="email"
                           name="email"
                           value={form.email}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           placeholder="matti@yritys.fi"
-                          required
                         />
+                        {touched.email && errors.email && (
+                          <span className={styles.errorMsg}>{errors.email}</span>
+                        )}
                       </div>
                       <div className={styles.field}>
                         <label className={styles.label}>Yritys</label>
@@ -213,7 +259,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               )}
             </AnimatePresence>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );

@@ -4,13 +4,14 @@
   background: rgba(0, 5, 12, 0.82);
   backdrop-filter: blur(6px);
   z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
 
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   z-index: 2001;
   width: 100%;
   max-width: 620px;
@@ -251,6 +252,26 @@
   line-height: 1.7;
   max-width: 340px;
   font-family: 'Montserrat', sans-serif;
+}
+
+/* Validation */
+.inputError {
+  border-color: rgba(255, 80, 80, 0.6) !important;
+  background: rgba(255, 80, 80, 0.04) !important;
+}
+
+.inputError:focus {
+  border-color: rgba(255, 80, 80, 0.8) !important;
+  box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.1) !important;
+}
+
+.errorMsg {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  color: #ff6b6b;
+  margin-top: -2px;
+  letter-spacing: 0.3px;
 }
 
 /* Responsive */
